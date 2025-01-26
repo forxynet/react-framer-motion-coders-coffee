@@ -1,8 +1,75 @@
+import { motion } from "framer-motion";
+import Coffee1 from "../../assets/coffee/coffee1.png";
+import Coffee3 from "../../assets/coffee/coffee3.png";
+
+const servicesData = [
+  {
+    id: 1,
+    image: Coffee1,
+    title: "Black Coffeee",
+    subtitle: "Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+  },
+  {
+    id: 2,
+    image: Coffee3,
+    title: "Hot Coffeee",
+    subtitle: "Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+  },
+  {
+    id: 3,
+    image: Coffee3,
+    title: "Cold Coffeee",
+    subtitle: "Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+  }
+]
+
 
 const Services = () => {
   return (
-    <div>
-
+    <div className="container my-16 space-y-4">
+      {/* header section */}
+      <div className="text-center max-w-lg mx-auto space-y-2">
+        <motion.h1
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 150,
+            damping: 10,
+            delay: 0.2 // Added delay for the first element
+          }}
+          className="text-3xl font-bold text-lightGray"
+        >
+          Freah and<span
+            className="text-primary">Tasty
+            coffee
+          </span>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 150,
+            damping: 10,
+            delay: 0.6 // Added delay for the first element
+          }}
+          className="text-sm opacity-50">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit illum voluptatum suscipit mollitia nisi aut? Provident magni magnam tempora quaerat cumque qui quasi dignissimos, quidem molestias assumenda illo, officia aliquam!
+        </motion.p>
+      </div>
+      {/* card section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {servicesData.map((service) => (
+          <div className="text-center p-4" key={service.id}>
+            <img src={service.image} alt={service.title} />
+            <div className="space-y-2">
+              <h1 className="text-2xl fond-bold text-primary" >{service.title}</h1>
+              <h1 className="text-darkGray">{service.subtitle}</h1>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 };
