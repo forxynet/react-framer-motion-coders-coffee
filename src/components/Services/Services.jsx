@@ -23,6 +23,31 @@ const servicesData = [
   }
 ]
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      // duration : 0.4 // Increase duration for smoother animation
+      type: "spring",
+      stiffness: 150,
+      damping: 10,
+      ease: "easeInOut", // Use an easing function
+    },
+  },
+};
+
+const containerVariantta = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.6,
+      staggerChildren: 0.4 // delay between animations
+    },
+  },
+};
 
 const Services = () => {
   return (
@@ -59,17 +84,25 @@ const Services = () => {
         </motion.p>
       </div>
       {/* card section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <motion.div
+        initial="hidden"
+        whileInView={"visible"}
+        viewport={{ amount: 0.8 }}
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {servicesData.map((service) => (
-          <div className="text-center p-4" key={service.id}>
-            <img src={service.image} alt={service.title} />
+          <motion.div
+            variants={cardVariants}
+            className="text-center p-4 space-y-6" key={service.id}>
+            <img src={service.image} alt={service.title}
+              className="img-shadow2 max-w-[200px] mx-auto hover:scale-110 duration:300 cursor-pointer"
+            />
             <div className="space-y-2">
               <h1 className="text-2xl fond-bold text-primary" >{service.title}</h1>
               <h1 className="text-darkGray">{service.subtitle}</h1>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 };
